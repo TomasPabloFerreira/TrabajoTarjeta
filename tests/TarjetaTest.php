@@ -126,7 +126,7 @@ public function testTrasbordoNoche(){
   //Pago por segunda vez despues de 65 minutos y verifico que funcione el trasbordo.
     $tiempo->avanzar(3900);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2);
+    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2));
 
   //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
     $tiempo->avanzar(546);
