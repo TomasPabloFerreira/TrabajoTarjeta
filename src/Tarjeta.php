@@ -59,27 +59,30 @@ class Tarjeta implements TarjetaInterface {
 
   public function trasbordo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
 
-      if ( $this->lineaUltColectivo == $colectivo->linea() && $this->cantTrasb != 0 )
-          return false;
-
-      $tiempoTranscurrido = $tiempo->time() - $this->ultimopago;
-      $trasbordo = false;
-      if ( $tiempoTranscurrido <= 3600 )
-          $trasbordo = true;
-      if ( $tiempoTranscurrido <= 5400 ) {
-          $dia = date("l", $tiempo->time());
-          $hora = idate("H", $tiempo->time());
-          if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22)
-              $trasbordo = true;
+      if ($this->lineaUltColectivo != $colectivo->linea() && $this->cantTrasb == 0)
+      {
+          if ($tiempo->time() - $this->ultimopago <= 3600) {
+              $this->ultimopago = $tiempo->time();
+              $this->lineaUltColectivo = $colectivo->linea();
+              $this->saldo -= (33 * $this->precio) / 100;
+              $this->banderaTrasb = TRUE;
+              $this->cantTrasb = 1;
+              return TRUE;
+          }
+          if ($tiempo->time() - $this->ultimopago <= 5400) {
+              $dia = date("l", $tiempo->time());
+              $hora = idate("H", $tiempo->time());
+              if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
+                  $this->ultimopago = $tiempo->time();
+                  $this->lineaUltColectivo = $colectivo->linea();
+                  $this->saldo -= (33 * $this->precio) / 100;
+                  $this->banderaTrasb = TRUE;
+                  $this->cantTrasb = 1;
+                  return TRUE;
+              }
+          }
+          return FALSE;
       }
-      if ($trasbordo) {
-          $this->ultimopago = $tiempo->time();
-          $this->lineaUltColectivo = $colectivo->linea();
-          $this->saldo -= (33 * $this->precio) / 100;
-          $this->banderaTrasb = true;
-          $this->cantTrasb = 1;
-      }
-      return $trasbordo;
   }
   
   public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
