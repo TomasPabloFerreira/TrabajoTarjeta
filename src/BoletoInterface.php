@@ -11,11 +11,11 @@ interface BoletoInterface {
      */
     public function obtenerValor();
 
-      /**
-       * Devuelve un objeto que respresenta el colectivo donde se viajó.
-       * 
-       * @return ColectivoInterface
-       */
+    /**
+     * Devuelve un objeto que respresenta el colectivo donde se viajó.
+     * 
+     * @return ColectivoInterface
+     */
     public function obtenerLinea();
 
     /**
@@ -25,11 +25,11 @@ interface BoletoInterface {
      */
     public function obtenerID();
 
-      /**
-       * Devuelve el saldo que queda en la tarjeta
-       * 
-       * @return float
-       */
+    /**
+     * Devuelve el saldo que queda en la tarjeta
+     * 
+     * @return float
+     */
     public function obtenerSaldo();
 
     /**
