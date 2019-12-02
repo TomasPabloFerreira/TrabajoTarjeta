@@ -30,13 +30,13 @@ class Tarjeta implements TarjetaInterface {
 
       $this->saldo += $monto;
 
-      if ($this->plus < 2) {
-        if ($this->plus == 0) {
-          $this->saldo -= 2 * 14.80;
-        }
-        else {
-          $this->saldo -= 14.80;
-        }
+      switch ($this->plus) {
+          case 0:
+              $this->saldo -= 2 * 14.80;
+              break;
+          case 1:
+              $this->saldo -= 14.80;
+              break;
       }
 
       $this->plus = 2;
@@ -72,11 +72,6 @@ class Tarjeta implements TarjetaInterface {
           }
 
           if ($trasbordo) {
-              $this->ultimopago = $tiempo->time();
-              $this->lineaUltColectivo = $colectivo->linea();
-              $this->saldo -= (33 * $this->precio) / 100;
-              $this->banderaTrasb = TRUE;
-              $this->cantTrasb = 1;
               return TRUE;
           } else {
               return FALSE;
@@ -87,14 +82,20 @@ class Tarjeta implements TarjetaInterface {
   public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
 
     if ($this->trasbordo($tiempo, $colectivo)) {
-      return TRUE;
-    }
 
-    $this->lineaUltColectivo = $colectivo->linea();
-    $this->ultimopago = $tiempo->time();
-    $this->saldo -= $this->precio;
-    $this->cantTrasb = 0;
-    return TRUE;
+        $this->ultimopago = $tiempo->time();
+        $this->lineaUltColectivo = $colectivo->linea();
+        $this->banderaTrasb = TRUE;
+        $this->cantTrasb = 1;
+        return TRUE;
+    } else {
+
+        $this->lineaUltColectivo = $colectivo->linea();
+        $this->ultimopago = $tiempo->time();
+        $this->saldo -= $this->precio;
+        $this->cantTrasb = 0;
+        return TRUE;
+    }
   }
 
   public function obtenerID() {

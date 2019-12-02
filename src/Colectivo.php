@@ -12,22 +12,18 @@ class Colectivo implements ColectivoInterface {
     $this->emp = $emp;
     $this->num = $num;
   }
-
   
   public function linea() {
     return $this->lin;
   }
-
   
   public function empresa() {
     return $this->emp;    
   }
-
   
   public function numero() {
     return $this->num;    
   }
-
   
   public function pagarCon(TiempoInterface $tiempo, TarjetaInterface $tarjeta) {
     
@@ -43,6 +39,5 @@ class Colectivo implements ColectivoInterface {
       return $boleto;
     }
   }
-
 
 }
