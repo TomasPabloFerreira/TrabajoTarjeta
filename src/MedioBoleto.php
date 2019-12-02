@@ -103,7 +103,7 @@ class MedioBoletoUni extends MedioBoleto {
           $this->saldo -= (33 * $this->precioNormal) / 100;
           $this->banderaTrasb = TRUE;
           $this->cantTrasb = 1;
-          return TRUE; 
+          return TRUE;
         }
 
       }
@@ -114,13 +114,11 @@ class MedioBoletoUni extends MedioBoleto {
   public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
     if($this->vecesUsado == 2)
     {
-
       //TRASBORDO DE BOLETO NORMAL
       if($this->trasbordoPrecioNormal($tiempo, $colectivo)){
         return TRUE;
       }
       //FIN TRASBORDO DE BOLETO NORMAL
-
 
       $this->ultimopago = $tiempo->time();
       $this->saldo-=$this->precioNormal;
