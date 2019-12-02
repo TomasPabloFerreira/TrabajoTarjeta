@@ -84,8 +84,6 @@ class MedioBoletoUni extends MedioBoleto {
   public $banderaTrasb;
   protected $lineaUltColectivo;
 
-
-
   public function trasbordoMedioUni(TiempoInterface $tiempo, ColectivoInterface $colectivo)	{		
     $dia=date("l", $tiempo->time());
     $hora=idate("H", $tiempo->time());
@@ -176,7 +174,6 @@ class MedioBoletoUni extends MedioBoleto {
       }
       //FIN TRASBORDO DE MEDIO BOLETO
 
-
       $this->ultimopago = $tiempo->time();
       $this->lineaUltColectivo = $colectivo->linea();
       $this->banderaTrasb = FALSE;
@@ -193,7 +190,7 @@ class MedioBoletoUni extends MedioBoleto {
   }
 
   //Reinicia el medio boleto universitario para usarlo, cada 24 hs
-  public function reiniciarMedio($tiempo) {
+  public function reiniciarMedio(TiempoInterface $tiempo) {
     $tiempo2 = $tiempo->time();
     $hora = date('H', $tiempo2);
     $minutos = date('i', $tiempo2);

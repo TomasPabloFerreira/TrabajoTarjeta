@@ -40,13 +40,11 @@ class Tarjeta implements TarjetaInterface {
       }
 
       $this->plus = 2;
-      $this->bandera = TRUE;
+      return TRUE;
     }
     else {
-      $this->bandera = FALSE;
+      return FALSE;
     }
-
-    return $this->bandera;
   }
 
   public function obtenerPrecio() {
