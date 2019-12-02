@@ -31,23 +31,29 @@ class Boleto implements BoletoInterface {
         $this->trasbordo = $tarjeta->banderaTrasb;
     }
 
+
     public function obtenerValor() {
         return $this->valor;
     }
 
+    
     public function obtenerLinea() {
         return $this->linea_colectivo;
     }
 
+    
     public function obtenerID() {
         return $this->idTarjeta;
     }
 
+    
     public function obtenerSaldo() {
         return $this->saldo;
     }
+
     
     public function obtenerFecha() {
         return $this->fecha;
     }
+
 }

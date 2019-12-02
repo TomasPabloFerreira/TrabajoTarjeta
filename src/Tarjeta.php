@@ -7,6 +7,7 @@ class Tarjeta implements TarjetaInterface {
   protected $saldo = 0;
   protected $plus = 2;
   protected $precio = 14.80;
+  protected $strasbordo = 4.884;
   protected $cantTrasb = 1;
   public $banderaTrasb;
   protected $ultimopago;
@@ -14,6 +15,10 @@ class Tarjeta implements TarjetaInterface {
   
   public function __construct($id) {
     $this->id = $id;
+  }
+  
+  public function cantTrasb() {
+    return $this->cantTrasb;
   }
 
   public function recargar($monto) {
@@ -40,13 +45,13 @@ class Tarjeta implements TarjetaInterface {
       }
 
       $this->plus = 2;
-      $bandera = TRUE;
+      $this->bandera = TRUE;
     }
     else {
-      $bandera = FALSE;
+      $this->bandera = FALSE;
     }
 
-    return $bandera;
+    return $this->bandera;
   }
 
   public function obtenerPrecio() {
@@ -59,36 +64,37 @@ class Tarjeta implements TarjetaInterface {
 
   public function trasbordo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
 
-    if ( $this->lineaUltColectivo == $colectivo->linea() && $this->cantTrasb != 0 )
-      return false;
+    if ($this->lineaUltColectivo != $colectivo->linea() && $this->cantTrasb == 0)
+    {
 
-    $tiempoTranscurrido = $tiempo->time() - $this->ultimopago;
-    $trasbordo = false;
-
-    if ( $tiempoTranscurrido <= 3600 )
-      $trasbordo = true;
-
-    if ( $tiempoTranscurrido <= 5400 ) {
-
-      $dia = date("l", $tiempo->time());
-      $hora = idate("H", $tiempo->time());
-
-      if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22)
-        $trasbordo = true;
+      if ($tiempo->time() - $this->ultimopago <= 3600) {
+        $this->ultimopago = $tiempo->time();
+        $this->lineaUltColectivo = $colectivo->linea();
+        $this->saldo -= (33 * $this->precio) / 100;
+        $this->banderaTrasb = TRUE;
+        $this->cantTrasb = 1;
+        return TRUE;
+      }
+      if ($tiempo->time() - $this->ultimopago <= 5400) {
+        $dia = date("l", $tiempo->time());
+        $hora = idate("H", $tiempo->time());
+        if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
+          $this->ultimopago = $tiempo->time();
+          $this->lineaUltColectivo = $colectivo->linea();
+          $this->saldo -= (33 * $this->precio) / 100;
+          $this->banderaTrasb = TRUE;
+          $this->cantTrasb = 1;
+          return TRUE;
+        }
+      }
+      return FALSE;
     }
-
-    if ($trasbordo) {
-      $this->ultimopago = $tiempo->time();
-      $this->lineaUltColectivo = $colectivo->linea();
-      $this->saldo -= (33 * $this->precio) / 100;
-      $this->banderaTrasb = true;
-      $this->cantTrasb = 1;
-    }
-
-    return $trasbordo;
   }
   
   public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
+    $dia = date("D", $tiempo->time());
+    $hora = idate("H", $tiempo->time());
+
 
     if ($this->trasbordo($tiempo, $colectivo)) {
       return TRUE;

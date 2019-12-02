@@ -28,8 +28,8 @@ interface ColectivoInterface {
     /**
      * Paga un viaje en el colectivo con una tarjeta en particular.
      *
-     * @param TiempoInterface $tiempo
-     * @param TarjetaInterface $tarjeta
+     * @param TiempoInterface $tiempo,TarjetaInterface $tarjeta
+     *
      * @return BoletoInterface|FALSE
      *  El boleto generado por el pago del viaje. O FALSE si no hay saldo
      *  suficiente en la tarjeta.
