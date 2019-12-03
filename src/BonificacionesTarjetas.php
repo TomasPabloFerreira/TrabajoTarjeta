@@ -1,6 +1,6 @@
 <?php
 
-namespace Bonificaciones;
+namespace TrabajoTarjeta;
 
 class BonificacionesTarjetas
 {
