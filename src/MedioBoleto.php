@@ -19,7 +19,6 @@ class MedioBoleto extends Tarjeta {
       if(($tiempo->time())-($this->ultimopago) <= 3600){
         $this->ultimopago = $tiempo->time();
         $this->lineaUltColectivo = $colectivo->linea();
-        $this->saldo-= (33*$this->precio)/100;
         $this->banderaTrasb=TRUE;
         $this->cantTrasb=1;
         return TRUE;
@@ -28,7 +27,6 @@ class MedioBoleto extends Tarjeta {
         if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
           $this->ultimopago = $tiempo->time();
           $this->lineaUltColectivo = $colectivo->linea();
-          $this->saldo-= (33*$this->precio)/100;
           $this->banderaTrasb=TRUE;
           $this->cantTrasb=1;
           return TRUE;
@@ -93,7 +91,6 @@ class MedioBoletoUni extends MedioBoleto {
       if(($tiempo->time())-($this->ultimopago) <= 3600){
         $this->ultimopago = $tiempo->time();
         $this->lineaUltColectivo = $colectivo->linea();
-        $this->saldo-= (33*$this->precio)/100;
         $this->banderaTrasb=TRUE;
         $this->cantTrasb=1;
         return TRUE;
@@ -102,16 +99,13 @@ class MedioBoletoUni extends MedioBoleto {
         if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
           $this->ultimopago = $tiempo->time();
           $this->lineaUltColectivo = $colectivo->linea();
-          $this->saldo-= (33*$this->precio)/100;
           $this->banderaTrasb=TRUE;
           $this->cantTrasb=1;
           return TRUE;
         }
       }
       return FALSE;
-
     }
-
   }
 
   public function trasbordoPrecioNormal(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
@@ -122,7 +116,6 @@ class MedioBoletoUni extends MedioBoleto {
       if (($tiempo->time()) - ($this->ultimopago) <= 3600) {
         $this->ultimopago = $tiempo->time();
         $this->lineaUltColectivo = $colectivo->linea();
-        $this->saldo -= (33 * $this->precioNormal) / 100;
         $this->banderaTrasb = TRUE;
         $this->cantTrasb = 1;
         return TRUE;
@@ -131,7 +124,6 @@ class MedioBoletoUni extends MedioBoleto {
         if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
           $this->ultimopago = $tiempo->time();
           $this->lineaUltColectivo = $colectivo->linea();
-          $this->saldo -= (33 * $this->precioNormal) / 100;
           $this->banderaTrasb = TRUE;
           $this->cantTrasb = 1;
           return TRUE; 
