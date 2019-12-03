@@ -16,7 +16,7 @@ class ColectivoTest extends TestCase {
 
         $this->assertTrue($tarjeta->recargar(20));
         $colectivo->pagarCon($tiempo, $tarjeta);
-        $this->assertEquals($tarjeta->obtenerSaldo(),5.20);
+        $this->assertEquals($tarjeta->obtenerSaldo(), 20 - Tarifas::BOLETO_NORMAL);
         $this->assertEquals($tarjeta->obtenerCantidadPlus(),2);
        
     }
