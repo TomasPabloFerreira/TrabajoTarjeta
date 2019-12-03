@@ -104,11 +104,11 @@ class TarjetaTest extends TestCase {
   //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
     $tiempo->avanzar(546);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(80.316-14.8));
+    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2-14.8));
 
     $tiempo->avanzar(1000);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(65.516-(14.8*0.33)));
+    $this->assertEquals($tarjeta->obtenerSaldo(),(70.4));
 }
 
 public function testTrasbordoNoche(){
@@ -131,11 +131,11 @@ public function testTrasbordoNoche(){
   //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
     $tiempo->avanzar(546);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(80.316-14.8));
+    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2-14.8));
 
     $tiempo->avanzar(1000);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(65.516-(14.8*0.33)));
+    $this->assertEquals($tarjeta->obtenerSaldo(),(70.4));
     
 }
 
