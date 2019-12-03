@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-abstract class MontosDeCarga
+class MontosDeCarga
 {
     const MONTOS = [
         [ 'importe' => 10.0,    'recarga_adicional' => 0.0,     'acredita' => 10.0],

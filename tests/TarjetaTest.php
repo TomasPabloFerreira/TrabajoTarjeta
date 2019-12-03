@@ -63,7 +63,6 @@ class TarjetaTest extends TestCase
         $this->assertFalse($colectivo->pagarCon($tiempo, $tarjeta));
         $this->assertTrue($tarjeta->recargar(30));
         $this->assertEquals($tarjeta->obtenerCantidadPlus(), 2);
-
     }
 
     //Testeo que el trasbordo cumpla con los requisitos para funcionar.
