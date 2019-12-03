@@ -4,7 +4,8 @@ namespace TrabajoTarjeta;
 
 class BonificacionesTarjetas
 {
-    public static function trasbordo (TiempoInterface $tiempo, ColectivoInterface $colectivo, TarjetaInterface $tarjeta) {
+    public static function trasbordo(TiempoInterface $tiempo, ColectivoInterface $colectivo, TarjetaInterface $tarjeta)
+    {
 
         if ($tarjeta->lineaUltColectivo != $colectivo->linea() && $tarjeta->cantTrasb == 0) {
             $trasbordo = false;

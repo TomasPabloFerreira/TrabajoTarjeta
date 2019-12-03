@@ -1,6 +1,8 @@
 <?php
+
 namespace TrabajoTarjeta;
 
-class FranquiciaCompleta extends Tarjeta {
-	protected $precio = 0.0;
+class FranquiciaCompleta extends Tarjeta
+{
+    protected $precio = 0.0;
 }
