@@ -101,7 +101,7 @@ class MedioBoletoTest extends TestCase {
 
       $tiempo->avanzar(1000);
       $this->assertTrue($tarjetam->descuentoSaldo($tiempo,$colectivo2));
-      $this->assertEquals($tarjetam->obtenerSaldo(),(100 - (3*Tarifas::MEDIO_BOLETO) - Tarifas::TRASBORDO));
+      $this->assertEquals($tarjetam->obtenerSaldo(),(100 - (2*Tarifas::MEDIO_BOLETO) - (2*Tarifas::TRASBORDO) ));
   }
 	
   public function testTrasbordoNoche(){
