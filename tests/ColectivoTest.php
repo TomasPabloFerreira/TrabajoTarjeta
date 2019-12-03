@@ -12,7 +12,7 @@ class ColectivoTest extends TestCase {
     public function testpagarConSaldo() {
         $colectivo = new Colectivo(144,"RosarioBus",5);
         $tarjeta = new Tarjeta(2345);
-	$tiempo = new TiempoFalso;
+	    $tiempo = new TiempoFalso;
 
         $this->assertTrue($tarjeta->recargar(100));
         $colectivo->pagarCon($tiempo, $tarjeta);
