@@ -20,7 +20,8 @@ class Tarjeta implements TarjetaInterface
 
     public function recargar($monto)
     {
-        $montosValidos = new MontosDeCarga();
+        $montos = new MontosDeCarga();
+        $montosValidos = $montos->getMontos();
 
         foreach ($montosValidos as list($importe, $recarga, $acredita)) {
             if ($importe == $monto) {

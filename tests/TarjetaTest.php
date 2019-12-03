@@ -12,7 +12,8 @@ class TarjetaTest extends TestCase
     public function testCargaSaldo()
     {
         $tarjeta = new Tarjeta(2345);
-        $montosValidos = new MontosDeCarga();
+        $montos = new MontosDeCarga();
+        $montosValidos = $montos->getMontos();
 
         foreach( $montosValidos as list($importe, $recarga, $acredita) ) {
             $this->assertTrue($tarjeta->recargar($importe));

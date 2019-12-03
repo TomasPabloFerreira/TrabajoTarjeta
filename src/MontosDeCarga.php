@@ -4,6 +4,10 @@ namespace TrabajoTarjeta;
 
 class MontosDeCarga
 {
+    public function getMontos () {
+        return $this->MONTOS;
+    }
+
     const MONTOS = [
         [ 'importe' => 10.0,    'recarga_adicional' => 0.0,     'acredita' => 10.0],
         [ 'importe' => 20.0,    'recarga_adicional' => 0.0,     'acredita' => 20.0],
