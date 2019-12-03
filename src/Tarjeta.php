@@ -4,14 +4,14 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface
 {
-    protected $id;
-    protected $saldo = 0;
-    protected $plus = 2;
-    protected $precio = Tarifas::BOLETO_NORMAL;
-    protected $cantTrasb = 1;
+    public $id;
+    public $saldo = 0;
+    public $plus = 2;
+    public $precio = Tarifas::BOLETO_NORMAL;
+    public $cantTrasb = 1;
     public $banderaTrasb;
-    protected $ultimopago;
-    protected $lineaUltColectivo;
+    public $ultimopago;
+    public $lineaUltColectivo;
 
     public function __construct($id)
     {
