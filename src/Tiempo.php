@@ -2,10 +2,12 @@
 
 namespace TrabajoTarjeta;
 
-class Tiempo implements TiempoInterface {
+class Tiempo implements TiempoInterface
+{
 
-	public function time() {
-		return time();
-	}
-	
+    public function time()
+    {
+        return time();
+    }
+
 }

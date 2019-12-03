@@ -20,25 +20,16 @@ class Tarjeta implements TarjetaInterface
 
     public function recargar($monto)
     {
-        // Montos aceptados:10, 20, 30, 50, 100, 510.15 y 962.59
-        if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
+        $montosValidos = new MontosDeCarga();
 
-            if ($monto == 510.15) {
-                $monto += 81.93;
+        foreach ($montosValidos as $montoValido) {
+            if ($montoValido['importe'] == $monto) {
+                $this->saldo = $montoValido['acredita'];
+                return true;
             }
-
-            if ($monto == 962.59) {
-                $monto += 221.58;
-            }
-
-            $this->saldo += $monto;
-
-            $this->cobrarPlus();
-
-            return TRUE;
-        } else {
-            return FALSE;
         }
+        // No se encontró el monto en la lista de montos validos
+        return false;
     }
 
     public function obtenerPrecio()
@@ -53,7 +44,7 @@ class Tarjeta implements TarjetaInterface
 
     public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo)
     {
-        if (BonificacionesTarjetas::trasbordo($tiempo, $colectivo,$this)) {
+        if (BonificacionesTarjetas::trasbordo($tiempo, $colectivo, $this)) {
 
             $this->ultimopago = $tiempo->time();
             $this->lineaUltColectivo = $colectivo->linea();
