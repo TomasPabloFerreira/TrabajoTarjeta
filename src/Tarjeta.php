@@ -1,7 +1,7 @@
 <?php
 
 namespace TrabajoTarjeta;
-use BonificacionesTarjetas;
+use Bonificaciones;
 
 class Tarjeta implements TarjetaInterface
 {
