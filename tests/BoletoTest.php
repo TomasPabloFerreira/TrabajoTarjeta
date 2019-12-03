@@ -19,6 +19,6 @@ class BoletoTest extends TestCase {
         $this->assertEquals($boleto->obtenerLinea(), 144);
         $this->assertEquals($boleto->obtenerID(), 2345);
         $this->assertEquals($boleto->obtenerFecha(),$fecha);
-        $this->assertEquals($boleto->obtenerSaldo(), $tarjeta->obtenerSaldo());
+        $this->assertEquals($boleto->obtenerSaldo(), 'Su saldo: '.$tarjeta->obtenerSaldo());
     }
 }

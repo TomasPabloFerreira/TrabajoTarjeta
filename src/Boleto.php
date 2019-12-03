@@ -46,7 +46,7 @@ class Boleto implements BoletoInterface {
 
     
     public function obtenerSaldo() {
-        return $this->saldo;
+        return 'Su saldo: '.$this->saldo;
     }
 
     
