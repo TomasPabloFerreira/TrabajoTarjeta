@@ -23,15 +23,13 @@ class Tarjeta implements TarjetaInterface
         $montos = new MontosDeCarga();
         $montosValidos = $montos->getMontos();
 
-        foreach ($montosValidos as list($importe, $recarga, $acredita)) if ($importe == $monto) {
+        foreach (MontosDeCarga::MONTOS as list($importe, $recarga, $acredita)) if ($importe == $monto) {
             $this->saldo += $acredita;
             $this->cobrarPlus();
             return true;
         }
         // No se encontró el monto en la lista de montos validos
-//        return false;
-        $this->saldo += 100; // test
-        return true;
+        return false;
     }
 
     public function obtenerPrecio()
