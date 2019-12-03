@@ -23,7 +23,7 @@ class MedioBoleto extends Tarjeta {
     }
 
     //TRASBORDO
-    if (parent::trasbordo($tiempo,$colectivo)){
+    if (BonificacionesTarjetas::trasbordo($tiempo,$colectivo,$this)){
       return TRUE;
     }
     //FIN TRASBORDO
