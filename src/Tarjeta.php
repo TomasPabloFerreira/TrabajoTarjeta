@@ -20,6 +20,31 @@ class Tarjeta implements TarjetaInterface
 
     public function recargar($monto)
     {
+        switch ($monto) {
+            case 10:
+            case 20:
+            case 30:
+            case 50:
+            case 100:
+                $this->saldo += $monto;
+                $this->cobrarPlus();
+                return true;
+                break;
+            case 119.90:
+                $this->saldo += 1300;
+                $this->cobrarPlus();
+                return true;
+                break;
+            case 2114.11:
+                $this->saldo += 2600;
+                $this->cobrarPlus();
+                return true;
+                break;
+            default:
+                return false;
+                break;
+        }
+        /*
         foreach (MontosDeCarga::MONTOS as list($importe, $recarga, $acredita)) if ($importe == $monto) {
             $this->saldo += $acredita;
             $this->cobrarPlus();
@@ -27,6 +52,7 @@ class Tarjeta implements TarjetaInterface
         }
         // No se encontró el monto en la lista de montos validos
         return false;
+        */
     }
 
     public function obtenerPrecio()
