@@ -4,11 +4,11 @@ namespace TrabajoTarjeta;
 
 class MedioBoleto extends Tarjeta {
   public $precio=Tarifas::MEDIO_BOLETO;
-  protected $universitario = FALSE;
-  protected $ultimopago;
-  protected $cantTrasb=1;
+    public $universitario = FALSE;
+    public $ultimopago;
+    public $cantTrasb=1;
   public $banderaTrasb;
-  protected $lineaUltColectivo;
+    public $lineaUltColectivo;
 
   /**
    * Descuenta el saldo del medio boleto, si es posible, realiza el pago del medio boleto, si no, de un boleto común
@@ -46,14 +46,14 @@ class MedioBoleto extends Tarjeta {
  */
 class MedioBoletoUni extends MedioBoleto {
   public $precio=Tarifas::MEDIO_BOLETO;
-  protected $precioNormal=Tarifas::BOLETO_NORMAL;
-  protected $universitario= TRUE;
-  protected $vecesUsado= 0;
-  protected $ultimopago=0;
-  protected $ultimomedio;
-  protected $cantTrasb=1;
+    public $precioNormal=Tarifas::BOLETO_NORMAL;
+    public $universitario= TRUE;
+    public $vecesUsado= 0;
+    public $ultimopago=0;
+    public $ultimomedio;
+  public $cantTrasb=1;
   public $banderaTrasb;
-  protected $lineaUltColectivo;
+    public $lineaUltColectivo;
 
   public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
     if($this->vecesUsado == 2)
