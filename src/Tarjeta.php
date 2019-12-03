@@ -6,7 +6,7 @@ class Tarjeta implements TarjetaInterface {
   protected $id;
   protected $saldo = 0;
   protected $plus = 2;
-  protected $precio = 14.80;
+  protected $precio = Tarifas::BOLETO_NORMAL;
   protected $cantTrasb = 1;
   public $banderaTrasb;
   protected $ultimopago;
@@ -32,10 +32,10 @@ class Tarjeta implements TarjetaInterface {
 
       switch ($this->plus) {
           case 0:
-              $this->saldo -= 2 * 14.80;
+              $this->saldo -= 2 * $this->precio;
               break;
           case 1:
-              $this->saldo -= 14.80;
+              $this->saldo -= $this->precio;
               break;
       }
 

@@ -2,7 +2,7 @@
 namespace TrabajoTarjeta;
 
 class MedioBoleto extends Tarjeta {
-  protected $precio=7.40;
+  protected $precio=Tarifas::MEDIO_BOLETO;
   protected $universitario = FALSE;
   protected $ultimopago;
   protected $cantTrasb=1;
@@ -74,8 +74,8 @@ class MedioBoleto extends Tarjeta {
  * @return bool
  */
 class MedioBoletoUni extends MedioBoleto {
-  protected $precio=7.40;
-  protected $precioNormal=14.80;
+  protected $precio=Tarifas::MEDIO_BOLETO;
+  protected $precioNormal=Tarifas::BOLETO_NORMAL;
   protected $universitario= TRUE;
   protected $vecesUsado= 0;
   protected $ultimopago=0;

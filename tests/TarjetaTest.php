@@ -99,16 +99,17 @@ class TarjetaTest extends TestCase {
   //Pago por segunda vez despues de 20 minutos y verifico que funcione el trasbordo.
     $tiempo->avanzar(1200);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2));
+    $this->assertEquals($tarjeta->obtenerSaldo(),(100-Tarifas::BOLETO_NORMAL));
 
   //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
     $tiempo->avanzar(546);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2-14.8));
+    $this->assertEquals($tarjeta->obtenerSaldo(),( 100-(2*Tarifas::BOLETO_NORMAL) ));
 
+    // Trasbordo
     $tiempo->avanzar(1000);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(70.4));
+    $this->assertEquals($tarjeta->obtenerSaldo(),( 100-(2*Tarifas::BOLETO_NORMAL) ));
 }
 
 public function testTrasbordoNoche(){
@@ -126,16 +127,17 @@ public function testTrasbordoNoche(){
   //Pago por segunda vez despues de 65 minutos y verifico que funcione el trasbordo.
     $tiempo->avanzar(3900);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2));
+    $this->assertEquals($tarjeta->obtenerSaldo(),( 100 - Tarifas::BOLETO_NORMAL ));
 
   //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
     $tiempo->avanzar(546);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(85.2-14.8));
+    $this->assertEquals($tarjeta->obtenerSaldo(),( 100-(2*Tarifas::BOLETO_NORMAL) ));
 
+    // Trasbordo
     $tiempo->avanzar(1000);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
-    $this->assertEquals($tarjeta->obtenerSaldo(),(70.4));
+    $this->assertEquals($tarjeta->obtenerSaldo(),( 100-(2*Tarifas::BOLETO_NORMAL) ));
     
 }
 

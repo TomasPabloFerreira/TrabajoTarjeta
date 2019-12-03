@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 class BoletoTest extends TestCase {
 
     public function testSaldoCero() {
-        $valor = 14.80;
+        $valor = Tarifas::BOLETO_NORMAL;
 		$tarjeta= new Tarjeta(2345);
         $colectivo= new Colectivo(144,"RosarioBus",7);
         $tiempo= new TiempoFalso;
