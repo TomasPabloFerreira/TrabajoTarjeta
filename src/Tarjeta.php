@@ -24,7 +24,7 @@ class Tarjeta implements TarjetaInterface
 
         foreach ($montosValidos as $montoValido) {
             if ($montoValido['importe'] == $monto) {
-                $this->saldo = $montoValido['acredita'];
+                $this->saldo += $montoValido['acredita'];
                 return true;
             }
         }
