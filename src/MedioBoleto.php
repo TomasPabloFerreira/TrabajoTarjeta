@@ -35,7 +35,6 @@ class MedioBoleto extends Tarjeta {
     $this->cantTrasb=0;
     return TRUE;
   }
-  
 }
 
 /**
@@ -60,7 +59,7 @@ class MedioBoletoUni extends MedioBoleto {
     {
 
       //TRASBORDO
-      if(parent::trasbordo($tiempo, $colectivo)){
+      if(BonificacionesTarjetas::trasbordo($tiempo, $colectivo,$this)){
         return TRUE;
       }
       //FIN TRASBORDO
@@ -81,7 +80,7 @@ class MedioBoletoUni extends MedioBoleto {
       }
 
       //TRASBORDO
-      if (parent::trasbordo($tiempo, $colectivo))
+      if (BonificacionesTarjetas::trasbordo($tiempo, $colectivo,$this))
       {
         return TRUE;
       }
