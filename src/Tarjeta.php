@@ -1,7 +1,6 @@
 <?php
 
 namespace TrabajoTarjeta;
-use Bonificaciones;
 
 class Tarjeta implements TarjetaInterface
 {
@@ -92,7 +91,7 @@ class Tarjeta implements TarjetaInterface
 
     public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo)
     {
-        if (BonificacionesTarjetas::trasbordo($tiempo, $colectivo,$this)) {
+        if ($this->trasbordo($tiempo, $colectivo,$this)) {
 
             $this->ultimopago = $tiempo->time();
             $this->lineaUltColectivo = $colectivo->linea();

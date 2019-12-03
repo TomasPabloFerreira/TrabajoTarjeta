@@ -10,34 +10,6 @@ class MedioBoleto extends Tarjeta {
   public $banderaTrasb;
   protected $lineaUltColectivo;
 
-
-  public function TrasbordoMedio(TiempoInterface $tiempo, ColectivoInterface $colectivo){
-    $dia=date("l", $tiempo->time());
-    $hora=idate("H", $tiempo->time());
-    if($this->lineaUltColectivo != $colectivo->linea() && $this->cantTrasb==0)
-    {
-
-      if(($tiempo->time())-($this->ultimopago) <= 3600){
-        $this->ultimopago = $tiempo->time();
-        $this->lineaUltColectivo = $colectivo->linea();
-        $this->banderaTrasb=TRUE;
-        $this->cantTrasb=1;
-        return TRUE;
-      }
-      if(($tiempo->time())-($this->ultimopago) <= 5400) {
-        if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
-          $this->ultimopago = $tiempo->time();
-          $this->lineaUltColectivo = $colectivo->linea();
-          $this->banderaTrasb=TRUE;
-          $this->cantTrasb=1;
-          return TRUE;
-        }
-      }
-      return FALSE;
-
-    }
-  }
-
   /**
    * Descuenta el saldo del medio boleto, si es posible, realiza el pago del medio boleto, si no, de un boleto común
    * tiene en cuenta el trasbordo
@@ -51,7 +23,7 @@ class MedioBoleto extends Tarjeta {
     }
 
     //TRASBORDO
-    if ($this->TrasbordoMedio($tiempo,$colectivo)){
+    if (parent::trasbordo($tiempo,$colectivo)){
       return TRUE;
     }
     //FIN TRASBORDO
@@ -83,67 +55,15 @@ class MedioBoletoUni extends MedioBoleto {
   public $banderaTrasb;
   protected $lineaUltColectivo;
 
-  public function trasbordoMedioUni(TiempoInterface $tiempo, ColectivoInterface $colectivo)	{		
-    $dia=date("l", $tiempo->time());
-    $hora=idate("H", $tiempo->time());
-    if($this->lineaUltColectivo != $colectivo->linea() && $this->cantTrasb==0)
-    {
-
-      if(($tiempo->time())-($this->ultimopago) <= 3600){
-        $this->ultimopago = $tiempo->time();
-        $this->lineaUltColectivo = $colectivo->linea();
-        $this->banderaTrasb=TRUE;
-        $this->cantTrasb=1;
-        return TRUE;
-      }
-      if(($tiempo->time())-($this->ultimopago) <= 5400) {
-        if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
-          $this->ultimopago = $tiempo->time();
-          $this->lineaUltColectivo = $colectivo->linea();
-          $this->banderaTrasb=TRUE;
-          $this->cantTrasb=1;
-          return TRUE;
-        }
-      }
-      return FALSE;
-    }
-  }
-
-  public function trasbordoPrecioNormal(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
-    $dia = date("l", $tiempo->time());
-    $hora = idate("H", $tiempo->time());
-    if ($this->lineaUltColectivo != $colectivo->linea() && $this->cantTrasb == 0)
-    {
-      if (($tiempo->time()) - ($this->ultimopago) <= 3600) {
-        $this->ultimopago = $tiempo->time();
-        $this->lineaUltColectivo = $colectivo->linea();
-        $this->banderaTrasb = TRUE;
-        $this->cantTrasb = 1;
-        return TRUE;
-      }
-      if (($tiempo->time()) - ($this->ultimopago) <= 5400) {
-        if ($dia == 0 || $hora >= 6 && $hora <= 22 || $dia == 6 && $hora >= 14 && $hora <= 22) {
-          $this->ultimopago = $tiempo->time();
-          $this->lineaUltColectivo = $colectivo->linea();
-          $this->banderaTrasb = TRUE;
-          $this->cantTrasb = 1;
-          return TRUE; 
-        }
-
-      }
-      return FALSE;
-    }
-  }
-
   public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo) {
     if($this->vecesUsado == 2)
     {
 
-      //TRASBORDO DE BOLETO NORMAL
-      if($this->trasbordoPrecioNormal($tiempo, $colectivo)){
+      //TRASBORDO
+      if(parent::trasbordo($tiempo, $colectivo)){
         return TRUE;
       }
-      //FIN TRASBORDO DE BOLETO NORMAL
+      //FIN TRASBORDO
 
 
       $this->ultimopago = $tiempo->time();
@@ -160,12 +80,12 @@ class MedioBoletoUni extends MedioBoleto {
         return FALSE;
       }
 
-      //TRASBORDO DE MEDIO BOLETO
-      if ($this->trasbordoMedioUni($tiempo, $colectivo))
+      //TRASBORDO
+      if (parent::trasbordo($tiempo, $colectivo))
       {
         return TRUE;
       }
-      //FIN TRASBORDO DE MEDIO BOLETO
+      //FIN TRASBORDO
 
       $this->ultimopago = $tiempo->time();
       $this->lineaUltColectivo = $colectivo->linea();
@@ -182,7 +102,7 @@ class MedioBoletoUni extends MedioBoleto {
     }
   }
 
-  //Reinicia el medio boleto universitario para usarlo, cada 24 hs
+  // Reinicia el medio boleto universitario para usarlo, cada 24 hs
   public function reiniciarMedio(TiempoInterface $tiempo) {
     $tiempo2 = $tiempo->time();
     $hora = date('H', $tiempo2);
