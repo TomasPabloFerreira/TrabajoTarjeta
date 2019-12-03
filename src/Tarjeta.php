@@ -32,7 +32,7 @@ class Tarjeta implements TarjetaInterface {
 
       switch ($this->plus) {
           case 0:
-              $this->saldo -= 2 * $this->precio;
+              $this->saldo -= (2 * $this->precio);
               break;
           case 1:
               $this->saldo -= $this->precio;
