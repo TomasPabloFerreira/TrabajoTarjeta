@@ -26,8 +26,6 @@ class Boleto implements BoletoInterface {
         $this->idTarjeta = $tarjeta->obtenerID();
         $this->saldo = $tarjeta->obtenerSaldo();
         $this->fecha = date("D/m/Y H:i:s", $tiempo->time());
-        
-        //Nos va a servir para que el boleto diga TRANSBORDO, si la bandera es TRUE
         $this->trasbordo = $tarjeta->banderaTrasb;
     }
 
