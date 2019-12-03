@@ -25,9 +25,9 @@ class ColectivoTest extends TestCase {
      * Comprueba que se puede pagar con la tarjeta si no tiene saldo y que no puede si no tiene viajes plus.
      */
     public function testpagarSinSaldo() {
-       $colectivo = new Colectivo(144,"RosarioBus",5); 
+        $colectivo = new Colectivo(144,"RosarioBus",5);
         $tarjeta = new Tarjeta(2345);
-	$tiempo = new TiempoFalso;        
+	    $tiempo = new TiempoFalso;
 
       $this->assertEquals($tarjeta->obtenerCantidadPlus(),2);
       $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
