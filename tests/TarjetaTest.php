@@ -76,11 +76,11 @@ class TarjetaTest extends TestCase {
     $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
     $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
     $this->assertFalse($colectivo->pagarCon($tiempo,$tarjeta));
-    $this->assertTrue($tarjeta->recargar(30));
-    $this->assertEquals($tarjeta->obtenerSaldo(), 30 - (2*Tarifas::BOLETO_NORMAL) );
+    $this->assertTrue($tarjeta->recargar(100));
+    $this->assertEquals($tarjeta->obtenerSaldo(), 100 - (2*Tarifas::BOLETO_NORMAL) );
     $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
-    $this->assertTrue($tarjeta->recargar(30));
-    $this->assertEquals($tarjeta->obtenerSaldo(),15.6);
+    $this->assertTrue($tarjeta->recargar(100));
+    $this->assertEquals($tarjeta->obtenerSaldo(), 100 + 100 - (3*Tarifas::BOLETO_NORMAL) );
 
   }
  //Testeo que el trasbordo cumpla con los requisitos para funcionar.
