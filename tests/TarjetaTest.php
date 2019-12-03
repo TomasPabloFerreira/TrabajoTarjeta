@@ -63,25 +63,6 @@ class TarjetaTest extends TestCase {
 
   }
 
-      /**
-     * Comprueba que la tarjeta descuente correctamente los viajes plus.
-     */
-
-  public function testDescuentoViajePlus()
-  { $colectivo = new Colectivo(144,"RosarioBus",5);
-    $tarjeta=new Tarjeta(2345);
-    $tiempo = new TiempoFalso;
-
-    $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
-    $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
-    $this->assertFalse($colectivo->pagarCon($tiempo,$tarjeta));
-    $this->assertTrue($tarjeta->recargar(100));
-    $this->assertEquals($tarjeta->obtenerSaldo(), 100 - (2*Tarifas::BOLETO_NORMAL) );
-    $this->assertTrue($colectivo->pagarCon($tiempo,$tarjeta));
-    $this->assertTrue($tarjeta->recargar(100));
-    $this->assertEquals($tarjeta->obtenerSaldo(), 100 + 100 - (3*Tarifas::BOLETO_NORMAL) );
-
-  }
  //Testeo que el trasbordo cumpla con los requisitos para funcionar.
  public function testTrasbordoTarjeta(){
     $colectivo = new Colectivo(144,"RosarioBus",6);

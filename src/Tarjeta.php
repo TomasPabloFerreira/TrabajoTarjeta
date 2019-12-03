@@ -30,7 +30,7 @@ class Tarjeta implements TarjetaInterface {
 
       $this->saldo += $monto;
 
-/*      switch ($this->plus) {
+      switch ($this->plus) {
           case 0:
               $this->saldo -= (2 * $this->precio);
               break;
@@ -44,25 +44,7 @@ class Tarjeta implements TarjetaInterface {
     }
     else {
       return FALSE;
-    }*/
-        if ($this->plus < 2) {
-            if ($this->plus == 0) {
-                $this->saldo -= 2 * 14.80;
-            }
-            else {
-                $this->saldo -= 14.80;
-            }
-        }
-
-        $this->plus = 2;
-        $this->bandera = TRUE;
     }
-    else {
-        $this->bandera = FALSE;
-    }
-
-      return $this->bandera;
-
   }
 
   public function obtenerPrecio() {
