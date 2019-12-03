@@ -14,9 +14,9 @@ class TarjetaTest extends TestCase
         $tarjeta = new Tarjeta(2345);
         $montosValidos = new MontosDeCarga();
 
-        foreach( $montosValidos as $montosValido ) {
-            $this->assertTrue($tarjeta->recargar($montosValido['importe']));
-            $this->assertEquals($tarjeta->obtenerSaldo(), $montosValido['acredita']);
+        foreach( $montosValidos as list($importe, $recarga, $acredita) ) {
+            $this->assertTrue($tarjeta->recargar($importe));
+            $this->assertEquals($tarjeta->obtenerSaldo(), $acredita);
         }
     }
 

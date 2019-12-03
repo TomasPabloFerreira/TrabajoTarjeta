@@ -22,10 +22,9 @@ class Tarjeta implements TarjetaInterface
     {
         $montosValidos = new MontosDeCarga();
 
-        foreach ($montosValidos as $montoValido) {
-            var_dump($montoValido);
-            if ($montoValido['importe'] == $monto) {
-                $this->saldo += $montoValido['acredita'];
+        foreach ($montosValidos as list($importe, $recarga, $acredita)) {
+            if ($importe == $monto) {
+                $this->saldo += $acredita;
                 return true;
             }
         }
