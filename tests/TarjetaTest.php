@@ -120,16 +120,16 @@ public function testTrasbordoNoche(){
     $tiempo = new TiempoFalso;
     $tiempo->avanzar(1535693521);
     
-  //Recargo la tarjeta y pago por primera vez.
+    //Recargo la tarjeta y pago por primera vez.
     $tarjeta->recargar(100);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo));
 
-  //Pago por segunda vez despues de 65 minutos y verifico que funcione el trasbordo.
+    //Pago por segunda vez despues de 65 minutos y verifico que funcione el trasbordo.
     $tiempo->avanzar(3900);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo2));
     $this->assertEquals($tarjeta->obtenerSaldo(),( 100 - Tarifas::BOLETO_NORMAL ));
 
-  //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
+    //Pago unos minutos despues, verificando que ahora no se aplique el trasbordo.
     $tiempo->avanzar(546);
     $this->assertTrue($tarjeta->descuentoSaldo($tiempo,$colectivo));
     $this->assertEquals($tarjeta->obtenerSaldo(),( 100-(2*Tarifas::BOLETO_NORMAL) ));
