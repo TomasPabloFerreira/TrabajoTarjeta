@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-abstract class BonificacionesTarjeta
+class BonificacionesTarjetas
 {
 
     public function trasbordo (TiempoInterface $tiempo, ColectivoInterface $colectivo, TarjetaInterface $tarjeta) {
