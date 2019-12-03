@@ -53,7 +53,7 @@ class Tarjeta implements TarjetaInterface
 
     public function descuentoSaldo(TiempoInterface $tiempo, ColectivoInterface $colectivo)
     {
-        if (BonificacionesTarjetas::trasbordo($tiempo, $colectivo,$this)) {
+        if (BonificacionesTarjetas::trasbordo($tiempo, $colectivo, $this)) {
 
             $this->ultimopago = $tiempo->time();
             $this->lineaUltColectivo = $colectivo->linea();
